@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "441738854512",
+    "project_id": "dileverybot",
+    "storage_bucket": "dileverybot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441738854512:android:e13a69aaef70e3fd3c74b5",
+        "android_client_info": {
+          "package_name": "ah.production.dileverybot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "441738854512-rqo8o23v0me9o26frvvnjkmapjhrm3mk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdt0r9v2Mpddte0pHh8--Gnzvx9qj-itU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "441738854512-rqo8o23v0me9o26frvvnjkmapjhrm3mk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
