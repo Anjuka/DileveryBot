@@ -13,4 +13,5 @@
     <color name="main_green_low">#107869</color>
     <color name="main_green_light">#478C5C</color>
     <color name="main_green_lime">#BACC81</color>
+    <color name="grayout">#808080</color>
 </resources>
