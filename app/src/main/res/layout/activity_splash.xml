@@ -22,7 +22,7 @@
         android:id="@+id/logo_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DileveryBot"
+        android:text="DeliveryBot"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_logo"
@@ -36,7 +36,7 @@
         android:id="@+id/logo_intro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Dilevery Partner Now On Your Finger Tip Distance"
+        android:text="Your Delivery Partner Now On Your Finger Tip Distance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo_name"
@@ -53,4 +53,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:indicatorColor="@color/main_green_lime"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

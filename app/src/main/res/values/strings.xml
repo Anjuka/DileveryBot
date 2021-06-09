@@ -1,3 +1,50 @@
 <resources>
     <string name="app_name">DeliveryBot</string>
+
+    <string-array name="vegetables">
+        <item>Batu</item>
+        <item>Beans</item>
+        <item>Beat Root (Rathuala)</item>
+        <item>Bellpeper</item>
+        <item>Broccoli</item>
+        <item>Butter Beans</item>
+        <item>Cabbage</item>
+        <item>Carrot</item>
+        <item>Corn</item>
+        <item>Cucumber</item>
+        <item>Egg Plant (Wambatu)</item>
+        <item>Garlic</item>
+        <item>Ginger</item>
+        <item>Gotu Kola</item>
+        <item>Green Chile</item>
+        <item>Innala</item>
+        <item>Kankun</item>
+        <item>Karapincha</item>
+        <item>Kochchi</item>
+        <item>Kohila</item>
+        <item>Leeks</item>
+        <item>Lettuce</item>
+        <item>Maa-Beans</item>
+        <item>Malu Miris</item>
+        <item>Malumiris</item>
+        <item>Maniyok</item>
+        <item>Mukunuwanna</item>
+        <item>Mushroom</item>
+        <item>Nivithi</item>
+        <item>Nokol</item>
+        <item>Okra (Bandakka)</item>
+        <item>Onion (Rathu Luunu)</item>
+        <item>Onion(Rata Luunu)</item>
+        <item>Pathola</item>
+        <item>Potato</item>
+        <item>Pumpkin</item>
+        <item>Raabu</item>
+        <item>Rampe</item>
+        <item>Spring Onion (Luunu Kola)</item>
+        <item>Sweet Potato</item>
+        <item>Tomato</item>
+        <item>Wambatu</item>
+        <item>Watakolu</item>
+    </string-array>
+
 </resources>

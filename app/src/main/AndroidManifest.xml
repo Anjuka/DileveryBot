@@ -3,6 +3,11 @@
     package="ah.production.dileverybot">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DileveryBot">
 
-        <activity android:name=".CamActivity"
+        <activity android:name=".WeightActivity"
             android:resizeableActivity="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
@@ -24,7 +29,7 @@
         </activity>
 
         <activity
-            android:name=".FruitsActivity"
+            android:name=".CartActivity"
             android:resizeableActivity="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
@@ -35,6 +40,28 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".CamActivity"
+            android:resizeableActivity="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".FruitsActivity"
+            android:resizeableActivity="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".VegiteblesActivity"
             android:resizeableActivity="true"
