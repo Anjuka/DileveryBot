@@ -29,15 +29,19 @@
             android:fontFamily="@font/signikanegative_semibold"/>
 
 
-        <ImageView
+        <TextView
+            android:id="@+id/tv_scale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_scale"
-            android:src="@drawable/ic_baseline_shopping_bag_24"
-            android:layout_weight="5"
-            android:layout_marginRight="0dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
-            android:visibility="invisible"/>
+            android:layout_marginRight="0dp"
+            android:layout_weight="3"
+            android:fontFamily="@font/signikanegative_semibold"
+            android:hint="0000g"
+            android:inputType="number"
+            android:textColor="@color/main_green_dark"
+            android:textSize="16dp" />
 
     </LinearLayout>
 

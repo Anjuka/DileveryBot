@@ -47,4 +47,34 @@
         <item>Watakolu</item>
     </string-array>
 
+    <string-array name="fruits">
+        <item>Apple Green</item>
+        <item>Apple Red</item>
+        <item>Avocado</item>
+        <item>Banana</item>
+        <item>Beli</item>
+        <item>Coconut</item>
+        <item>Dragonfruit</item>
+        <item>Grape Green</item>
+        <item>Grape Red</item>
+        <item>Guava (Pera)</item>
+        <item>Jackfruit</item>
+        <item>Kin Coconut</item>
+        <item>Kiwi</item>
+        <item>Lemon</item>
+        <item>Lime</item>
+        <item>Mango</item>
+        <item>Melon</item>
+        <item>Nelli</item>
+        <item>Orange</item>
+        <item>Papaya</item>
+        <item>Pear</item>
+        <item>Pineapple</item>
+        <item>Pomegranate</item>
+        <item>Starfruit</item>
+        <item>Strawberry</item>
+        <item>Watermelon</item>
+        <item>Wood apple (Diwul)</item>
+    </string-array>
+
 </resources>

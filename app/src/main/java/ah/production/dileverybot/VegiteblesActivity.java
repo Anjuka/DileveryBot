@@ -1,33 +1,25 @@
 package ah.production.dileverybot;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 import ah.production.dileverybot.adapter.CartAdapter;
 import ah.production.dileverybot.adapter.VegAdapter;
@@ -39,10 +31,13 @@ public class VegiteblesActivity extends AppCompatActivity implements VegAdapter.
 
     ArrayList<ItemsData> itemsData = new ArrayList<>();
     ArrayList<CartItemsData> cartItems = new ArrayList<>();
+    ArrayList<ItemsData> itemsDataFruits = new ArrayList<>();
+
     private VegAdapter vegAdapter;
     private CartAdapter cartAdapter;
     private RecyclerView rv_vegetables;
     private ImageView iv_cart;
+    private ImageView iv_home;
     private GestureDetector gesture;
 
 
@@ -53,16 +48,28 @@ public class VegiteblesActivity extends AppCompatActivity implements VegAdapter.
 
         SwipeController.MyStatusFragment = "VegiteblesActivity";
 
-        rv_vegetables = findViewById(R.id.rv_vegetables);
-        iv_cart = findViewById(R.id.iv_cart);
+        rv_vegetables = findViewById(R.id.rv_scaler);
+        iv_cart = findViewById(R.id.iv_clear_cart);
+        iv_home = findViewById(R.id.iv_home);
 
         iv_cart.setOnClickListener(this);
+        iv_home.setOnClickListener(this);
+
+
+        cartItems = (ArrayList<CartItemsData>) getIntent().getSerializableExtra("cart_key");
+        itemsData = (ArrayList<ItemsData>) getIntent().getSerializableExtra("veg_key");
+        itemsDataFruits = (ArrayList<ItemsData>) getIntent().getSerializableExtra("fruit_key");
 
         String[] vegetableList = getResources().getStringArray(R.array.vegetables);
 
-        for (int x = 0; x < vegetableList.length; x++) {
-            ItemsData vegItem = new ItemsData(vegetableList[x], false, -1);
-            itemsData.add(vegItem);
+        if (itemsData == null) {
+
+            itemsData = new ArrayList<>();
+
+            for (int x = 0; x < vegetableList.length; x++) {
+                ItemsData vegItem = new ItemsData(vegetableList[x], false, -1, "");
+                itemsData.add(vegItem);
+            }
         }
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
@@ -89,7 +96,11 @@ public class VegiteblesActivity extends AppCompatActivity implements VegAdapter.
 
         } else {
             itemsData.get(position).setIs_check(true);
-            CartItemsData cartItemsData = new CartItemsData(itemsData.get(position).getItem_name(), itemsData.get(position).isIs_check(), itemsData.get(position).getPosition());
+            CartItemsData cartItemsData = new CartItemsData(itemsData.get(position).getItem_name(), itemsData.get(position).isIs_check(), itemsData.get(position).getPosition(), itemsData.get(position).getItem_quanti());
+
+            if (cartItems == null){
+                cartItems = new ArrayList<>();
+            }
             cartItems.add(cartItemsData);
         }
 
@@ -103,8 +114,19 @@ public class VegiteblesActivity extends AppCompatActivity implements VegAdapter.
         int id = v.getId();
 
         switch (id){
-            case R.id.iv_cart:
+            case R.id.iv_clear_cart:
                 showCart(v, cartItems);
+                break;
+
+                case R.id.iv_home:
+
+                    finish();
+                    Intent intenHome = new Intent(getApplicationContext(), MainActivity.class);
+                    intenHome.putExtra("cart_key", cartItems);
+                    intenHome.putExtra("veg_key", itemsData);
+                    intenHome.putExtra("fruit_key", itemsDataFruits);
+                    startActivity(intenHome);
+
                 break;
 
         }
@@ -141,6 +163,9 @@ public class VegiteblesActivity extends AppCompatActivity implements VegAdapter.
             public void onClick(View v) {
                 dialog.dismiss();
                 Intent intentWeight = new Intent(getApplicationContext(), WeightActivity.class);
+                intentWeight.putExtra("cart_key", cartItems_);
+                intentWeight.putExtra("veg_key", itemsData);
+                intentWeight.putExtra("fruit_key", itemsDataFruits);
                 startActivity(intentWeight);
             }
         });
@@ -177,11 +202,31 @@ public class VegiteblesActivity extends AppCompatActivity implements VegAdapter.
 
                         Log.d("TAG", "onClick: pos " + position);
 
+                        if (itemsData != null) {
+                            for (int y = 0; y < itemsData.size(); y++) {
+                                if (cartItems_.get(position).getItem_name().equals(itemsData.get(y).getItem_name())) {
+                                    itemsData.get(y).setIs_check(false);
+                                    itemsData.get(y).setItem_quanti("");
+                                }
+                            }
+                        }
+
+                        if (itemsDataFruits != null) {
+                            for (int y = 0; y < itemsDataFruits.size(); y++) {
+                                if (cartItems_.get(position).getItem_name().equals(itemsDataFruits.get(y).getItem_name())) {
+                                    itemsDataFruits.get(y).setIs_check(false);
+                                    itemsDataFruits.get(y).setItem_quanti("");
+                                }
+                            }
+                        }
+
+/*
                         for (int y = 0; y < itemsData.size(); y++) {
                             if (cartItems_.get(position).getItem_name().equals(itemsData.get(y).getItem_name())) {
                                 itemsData.get(y).setIs_check(false);
                             }
                         }
+*/
 
                         cartItems_.remove(position);
                         cartAdapter = new CartAdapter(VegiteblesActivity.this, cartItems_);

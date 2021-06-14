@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,15 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import ah.production.dileverybot.R;
+import ah.production.dileverybot.model.CartItemsData;
 import ah.production.dileverybot.model.ItemsData;
 
-public class VegAdapter extends RecyclerView.Adapter<VegAdapter.VegViewHolder> {
+public class ScalerAdapter extends RecyclerView.Adapter<ScalerAdapter.VegViewHolder> {
 
     Context mContext;
-    ArrayList<ItemsData> mData;
+    ArrayList<CartItemsData> mData;
     private OnItemClickListner onItemClickListner;
 
-    public VegAdapter(Context mContext, ArrayList<ItemsData> mData, OnItemClickListner onItemClickListner) {
+    public ScalerAdapter(Context mContext, ArrayList<CartItemsData> mData, OnItemClickListner onItemClickListner) {
         this.mContext = mContext;
         this.mData = mData;
         this.onItemClickListner = onItemClickListner;
@@ -31,7 +33,7 @@ public class VegAdapter extends RecyclerView.Adapter<VegAdapter.VegViewHolder> {
     @Override
     public VegViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View layout;
-        layout = LayoutInflater.from(mContext).inflate(R.layout.item_veg, viewGroup, false);
+        layout = LayoutInflater.from(mContext).inflate(R.layout.item_scaler, viewGroup, false);
         return new VegViewHolder(layout, onItemClickListner);
     }
 
@@ -39,12 +41,7 @@ public class VegAdapter extends RecyclerView.Adapter<VegAdapter.VegViewHolder> {
     public void onBindViewHolder(@NonNull VegViewHolder holder, int position) {
 
         holder.tv_item_name.setText(mData.get(position).getItem_name());
-        if (mData.get(position).isIs_check()){
-            holder.cb_select.setVisibility(View.VISIBLE);
-        }
-        else {
-            holder.cb_select.setVisibility(View.INVISIBLE);
-        }
+        holder.tv_scale.setText(mData.get(position).getItem_quanti() + " g");
     }
 
     @Override
@@ -55,13 +52,14 @@ public class VegAdapter extends RecyclerView.Adapter<VegAdapter.VegViewHolder> {
     public class VegViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tv_item_name;
-        ImageView cb_select;
+        TextView tv_scale;
         OnItemClickListner onItemClickListner_;
 
         public VegViewHolder(@NonNull View itemView, OnItemClickListner onItemClickListner) {
             super(itemView);
             tv_item_name = itemView.findViewById(R.id.tv_item_name);
-            cb_select = itemView.findViewById(R.id.tv_scale);
+            tv_scale = itemView.findViewById(R.id.tv_scale);
+
             this.onItemClickListner_ = onItemClickListner;
 
             itemView.setOnClickListener(this);

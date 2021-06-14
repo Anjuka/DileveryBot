@@ -17,7 +17,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DileveryBot">
 
-        <activity android:name=".WeightActivity"
+        <activity
+            android:name=".ConfrimActivity"
+            android:resizeableActivity="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".WeightActivity"
             android:resizeableActivity="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">

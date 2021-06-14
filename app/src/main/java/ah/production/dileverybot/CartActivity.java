@@ -20,5 +20,9 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
+
+        cartItemsData = getIntent().getParcelableArrayListExtra("cart_key");
+        Log.d(TAG, "onCreate: " + cartItemsData);
+
     }
 }

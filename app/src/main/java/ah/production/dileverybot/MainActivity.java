@@ -15,6 +15,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
+
+import ah.production.dileverybot.model.CartItemsData;
+import ah.production.dileverybot.model.ItemsData;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView iv_menu;
@@ -24,6 +29,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btn_grocery;
     private Button btn_medicine;
     private Button btn_customlist;
+
+    private ArrayList<CartItemsData> cartItemsData = new ArrayList<>();
+    ArrayList<ItemsData> itemsData = new ArrayList<>();
+    ArrayList<ItemsData> itemsDataFruits = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +55,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_customlist.setOnClickListener(this);
         iv_cam.setOnClickListener(this);
 
+        cartItemsData = (ArrayList<CartItemsData>) getIntent().getSerializableExtra("cart_key");
+        itemsData = (ArrayList<ItemsData>) getIntent().getSerializableExtra("veg_key");
+        itemsDataFruits = (ArrayList<ItemsData>) getIntent().getSerializableExtra("fruit_key");
+
     }
 
     @Override
@@ -59,11 +72,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btn_veg:
                 Intent intentVeg = new Intent(getApplicationContext(), VegiteblesActivity.class);
+                intentVeg.putExtra("cart_key", cartItemsData);
+                intentVeg.putExtra("veg_key", itemsData);
+                intentVeg.putExtra("fruit_key", itemsDataFruits);
                 startActivity(intentVeg);
                 break;
 
             case R.id.btn_fruits:
                 Intent intentVFru = new Intent(getApplicationContext(), FruitsActivity.class);
+                intentVFru.putExtra("cart_key", cartItemsData);
+                intentVFru.putExtra("veg_key", itemsData);
+                intentVFru.putExtra("fruit_key", itemsDataFruits);
                 startActivity(intentVFru);
                 break;
 
