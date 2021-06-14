@@ -1,4 +1,4 @@
-package ah.production.dileverybot;
+package ah.production.dileverybot.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import ah.production.dileverybot.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 

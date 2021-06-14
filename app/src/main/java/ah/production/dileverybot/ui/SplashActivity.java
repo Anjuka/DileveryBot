@@ -1,4 +1,4 @@
-package ah.production.dileverybot;
+package ah.production.dileverybot.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.wang.avi.AVLoadingIndicatorView;
+
+import ah.production.dileverybot.R;
 
 public class SplashActivity extends AppCompatActivity {
 

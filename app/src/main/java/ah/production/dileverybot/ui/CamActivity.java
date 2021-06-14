@@ -1,4 +1,4 @@
-package ah.production.dileverybot;
+package ah.production.dileverybot.ui;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,6 +39,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+
+import ah.production.dileverybot.R;
 
 public class CamActivity extends AppCompatActivity implements View.OnClickListener {
 

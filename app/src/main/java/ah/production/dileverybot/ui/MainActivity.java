@@ -1,22 +1,22 @@
-package ah.production.dileverybot;
+package ah.production.dileverybot.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.LightingColorFilter;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import ah.production.dileverybot.R;
 import ah.production.dileverybot.model.CartItemsData;
 import ah.production.dileverybot.model.ItemsData;
 
@@ -118,5 +118,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.show();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(MainActivity.this);
+
+        LayoutInflater inflater = getWindow().getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.custom_dialog_alert, null);
+        builder1.setView(dialogView);
+
+        TextView head = dialogView.findViewById(R.id.tv_head);
+        Button btn_no = dialogView.findViewById(R.id.btn_no);
+        Button btn_remove = dialogView.findViewById(R.id.btn_yes);
+
+        btn_remove.setText("Yes");
+
+        head.setText("This operation will close the app");
+        androidx.appcompat.app.AlertDialog alert11 = builder1.create();
+
+        btn_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert11.dismiss();
+            }
+        });
+
+        btn_remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert11.dismiss();
+                finish();
+            }
+        });
+        alert11.show();
     }
 }

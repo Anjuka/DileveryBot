@@ -1,4 +1,4 @@
-package ah.production.dileverybot;
+package ah.production.dileverybot.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +24,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import ah.production.dileverybot.R;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 

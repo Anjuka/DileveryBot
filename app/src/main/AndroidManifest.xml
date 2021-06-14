@@ -18,7 +18,7 @@
         android:theme="@style/Theme.DileveryBot">
 
         <activity
-            android:name=".ConfrimActivity"
+            android:name=".ui.ConfrimActivity"
             android:resizeableActivity="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
@@ -30,7 +30,7 @@
         </activity>
 
         <activity
-            android:name=".WeightActivity"
+            android:name=".ui.WeightActivity"
             android:resizeableActivity="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
@@ -42,7 +42,7 @@
         </activity>
 
         <activity
-            android:name=".CartActivity"
+            android:name=".ui.CartActivity"
             android:resizeableActivity="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
@@ -54,7 +54,7 @@
         </activity>
 
         <activity
-            android:name=".CamActivity"
+            android:name=".ui.CamActivity"
             android:resizeableActivity="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
@@ -65,7 +65,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FruitsActivity"
+            android:name=".ui.FruitsActivity"
             android:resizeableActivity="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
@@ -76,7 +76,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".VegiteblesActivity"
+            android:name=".ui.VegiteblesActivity"
             android:resizeableActivity="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
@@ -87,7 +87,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RegisterActivity"
+            android:name=".ui.RegisterActivity"
             android:resizeableActivity="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
@@ -98,7 +98,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.LoginActivity"
             android:resizeableActivity="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
@@ -109,7 +109,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.SplashActivity"
             android:resizeableActivity="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
@@ -120,7 +120,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:resizeableActivity="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">

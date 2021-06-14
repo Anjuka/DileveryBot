@@ -1,4 +1,4 @@
-package ah.production.dileverybot;
+package ah.production.dileverybot.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import ah.production.dileverybot.R;
 import ah.production.dileverybot.adapter.CartAdapter;
 import ah.production.dileverybot.adapter.VegAdapter;
 import ah.production.dileverybot.model.CartItemsData;
@@ -60,9 +61,15 @@ public class VegiteblesActivity extends AppCompatActivity implements VegAdapter.
         itemsData = (ArrayList<ItemsData>) getIntent().getSerializableExtra("veg_key");
         itemsDataFruits = (ArrayList<ItemsData>) getIntent().getSerializableExtra("fruit_key");
 
+        if (cartItems == null) {
+
+            cartItems = new ArrayList<>();
+
+        }
+
         String[] vegetableList = getResources().getStringArray(R.array.vegetables);
 
-        if (itemsData == null) {
+        if (itemsData == null || itemsData.size() == 0) {
 
             itemsData = new ArrayList<>();
 
@@ -244,5 +251,44 @@ public class VegiteblesActivity extends AppCompatActivity implements VegAdapter.
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(VegiteblesActivity.this);
+
+        LayoutInflater inflater = getWindow().getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.custom_dialog_alert, null);
+        builder1.setView(dialogView);
+
+        TextView head = dialogView.findViewById(R.id.tv_head);
+        Button btn_no = dialogView.findViewById(R.id.btn_no);
+        Button btn_remove = dialogView.findViewById(R.id.btn_yes);
+
+        btn_remove.setText("Yes");
+
+        head.setText("This operation will navigate to Home page");
+        androidx.appcompat.app.AlertDialog alert11 = builder1.create();
+
+        btn_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert11.dismiss();
+            }
+        });
+
+        btn_remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert11.dismiss();
+                finish();
+                Intent intenHome = new Intent(getApplicationContext(), MainActivity.class);
+                intenHome.putExtra("cart_key", cartItems);
+                intenHome.putExtra("veg_key", itemsData);
+                intenHome.putExtra("fruit_key", itemsDataFruits);
+                startActivity(intenHome);
+            }
+        });
+        alert11.show();
     }
 }

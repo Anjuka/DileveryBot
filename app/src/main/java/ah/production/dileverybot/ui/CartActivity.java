@@ -1,4 +1,4 @@
-package ah.production.dileverybot;
+package ah.production.dileverybot.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import ah.production.dileverybot.R;
 import ah.production.dileverybot.model.CartItemsData;
 
 public class CartActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package ah.production.dileverybot;
+package ah.production.dileverybot.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -22,9 +22,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ah.production.dileverybot.R;
 import ah.production.dileverybot.adapter.Cart_Scaler_Adapter;
 import ah.production.dileverybot.adapter.ScalerAdapter;
 import ah.production.dileverybot.model.CartItemsData;
@@ -41,6 +43,7 @@ public class WeightActivity extends AppCompatActivity implements ScalerAdapter.O
     private Cart_Scaler_Adapter cartAdapter;
     private ImageView iv_cart;
     private ImageView iv_home;
+    private boolean isEmpty = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,6 +160,8 @@ public class WeightActivity extends AppCompatActivity implements ScalerAdapter.O
         cartAdapter = new Cart_Scaler_Adapter(WeightActivity.this, cartItems_);
         rv_cart.setAdapter(cartAdapter);
 
+        dialog.setCancelable(false);
+
         DisplayMetrics metrics = v.getContext().getApplicationContext().getResources().getDisplayMetrics();
         int width = metrics.widthPixels;
         int height = metrics.heightPixels;
@@ -167,6 +172,7 @@ public class WeightActivity extends AppCompatActivity implements ScalerAdapter.O
         iv_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isEmpty = false;
                 dialog.dismiss();
             }
         });
@@ -174,10 +180,25 @@ public class WeightActivity extends AppCompatActivity implements ScalerAdapter.O
         btn_weight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
-                Intent intentWeight = new Intent(getApplicationContext(), ConfrimActivity.class);
-                intentWeight.putExtra("key", cartItems_);
-                startActivity(intentWeight);
+
+                for(int x =0; x < cartItems_.size(); x++){
+                    if (cartItems_.get(x).getItem_quanti().equals("")){
+                        isEmpty = true;
+                    }
+                }
+
+                if (isEmpty){
+                    Toast.makeText(getApplicationContext(), "Please set quantity for all cart items", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    dialog.dismiss();
+                    Intent intentWeight = new Intent(getApplicationContext(), ConfrimActivity.class);
+                    intentWeight.putExtra("cart_key", cartItems_);
+                    intentWeight.putExtra("veg_key", itemsData);
+                    intentWeight.putExtra("fruit_key", itemsDataFruits);
+                    startActivity(intentWeight);
+                    isEmpty = false;
+                }
             }
         });
 
@@ -248,4 +269,44 @@ public class WeightActivity extends AppCompatActivity implements ScalerAdapter.O
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(WeightActivity.this);
+
+        LayoutInflater inflater = getWindow().getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.custom_dialog_alert, null);
+        builder1.setView(dialogView);
+
+        TextView head = dialogView.findViewById(R.id.tv_head);
+        Button btn_no = dialogView.findViewById(R.id.btn_no);
+        Button btn_remove = dialogView.findViewById(R.id.btn_yes);
+
+        btn_remove.setText("Yes");
+
+        head.setText("This operation will navigate to Home page");
+        androidx.appcompat.app.AlertDialog alert11 = builder1.create();
+
+        btn_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert11.dismiss();
+            }
+        });
+
+        btn_remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert11.dismiss();
+                finish();
+                Intent intenHome = new Intent(getApplicationContext(), MainActivity.class);
+                intenHome.putExtra("cart_key", cartItemsData);
+                intenHome.putExtra("veg_key", itemsData);
+                intenHome.putExtra("fruit_key", itemsDataFruits);
+                startActivity(intenHome);
+            }
+        });
+        alert11.show();
+    }
+
 }

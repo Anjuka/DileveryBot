@@ -1,4 +1,4 @@
-package ah.production.dileverybot;
+package ah.production.dileverybot.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import ah.production.dileverybot.R;
 import ah.production.dileverybot.adapter.CartAdapter;
 import ah.production.dileverybot.adapter.VegAdapter;
 import ah.production.dileverybot.model.CartItemsData;
@@ -56,7 +57,13 @@ public class FruitsActivity extends AppCompatActivity implements View.OnClickLis
 
         String[] fruitsleList = getResources().getStringArray(R.array.fruits);
 
-        if (itemsDataFruits == null) {
+        if (cartItems == null) {
+
+            cartItems = new ArrayList<>();
+
+        }
+
+        if (itemsDataFruits == null || itemsDataFruits.size() == 0) {
 
             itemsDataFruits = new ArrayList<>();
 
@@ -78,7 +85,7 @@ public class FruitsActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         int id = v.getId();
 
-        switch (id){
+        switch (id) {
             case R.id.iv_clear_cart:
                 showCart(v, cartItems);
                 break;
@@ -115,7 +122,7 @@ public class FruitsActivity extends AppCompatActivity implements View.OnClickLis
             itemsDataFruits.get(position).setIs_check(true);
             CartItemsData cartItemsData = new CartItemsData(itemsDataFruits.get(position).getItem_name(), itemsDataFruits.get(position).isIs_check(), itemsDataFruits.get(position).getPosition(), itemsDataFruits.get(position).getItem_quanti());
 
-            if (cartItems == null){
+            if (cartItems == null) {
                 cartItems = new ArrayList<>();
             }
             cartItems.add(cartItemsData);
@@ -167,7 +174,7 @@ public class FruitsActivity extends AppCompatActivity implements View.OnClickLis
         rv_cart.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("TAG", "onItemLongClick: "+ position);
+                Log.d("TAG", "onItemLongClick: " + position);
 
                 androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(FruitsActivity.this);
 
@@ -195,7 +202,6 @@ public class FruitsActivity extends AppCompatActivity implements View.OnClickLis
                     public void onClick(View v) {
 
                         Log.d("TAG", "onClick: pos " + position);
-
 
 
                         if (itemsData != null) {
@@ -240,5 +246,45 @@ public class FruitsActivity extends AppCompatActivity implements View.OnClickLis
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(FruitsActivity.this);
+
+        LayoutInflater inflater = getWindow().getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.custom_dialog_alert, null);
+        builder1.setView(dialogView);
+
+        TextView head = dialogView.findViewById(R.id.tv_head);
+        Button btn_no = dialogView.findViewById(R.id.btn_no);
+        Button btn_remove = dialogView.findViewById(R.id.btn_yes);
+
+        btn_remove.setText("Yes");
+
+        head.setText("This operation will navigate to Home page");
+        androidx.appcompat.app.AlertDialog alert11 = builder1.create();
+
+        btn_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert11.dismiss();
+            }
+        });
+
+        btn_remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert11.dismiss();
+                finish();
+                Intent intenHome = new Intent(getApplicationContext(), MainActivity.class);
+                intenHome.putExtra("cart_key", cartItems);
+                intenHome.putExtra("veg_key", itemsData);
+                intenHome.putExtra("fruit_key", itemsDataFruits);
+                startActivity(intenHome);
+            }
+        });
+        alert11.show();
+    }
+
 
 }
