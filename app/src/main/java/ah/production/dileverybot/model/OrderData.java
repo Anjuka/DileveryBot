@@ -11,6 +11,10 @@ public class OrderData {
     @Expose
     private String order_time;
 
+    @SerializedName("status")
+    @Expose
+    private String status;
+
     @SerializedName("order_date")
     @Expose
     private String order_date;
@@ -23,8 +27,12 @@ public class OrderData {
     @Expose
     private ArrayList<CartItemsData> order_list;
 
-    public OrderData(String order_time, String order_date, int order_number, ArrayList<CartItemsData> order_list) {
+    public OrderData() {
+    }
+
+    public OrderData(String order_time, String status, String order_date, int order_number, ArrayList<CartItemsData> order_list) {
         this.order_time = order_time;
+        this.status = status;
         this.order_date = order_date;
         this.order_number = order_number;
         this.order_list = order_list;
@@ -60,5 +68,13 @@ public class OrderData {
 
     public void setOrder_list(ArrayList<CartItemsData> order_list) {
         this.order_list = order_list;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

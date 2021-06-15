@@ -1,6 +1,11 @@
 package ah.production.dileverybot.ui;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -8,19 +13,27 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.material.navigation.NavigationView;
+
 import java.util.ArrayList;
 
+import ah.production.dileverybot.FCMNotification;
+import ah.production.dileverybot.OrderActivity;
 import ah.production.dileverybot.R;
 import ah.production.dileverybot.model.CartItemsData;
 import ah.production.dileverybot.model.ItemsData;
+import ah.production.dileverybot.model.OrderData;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import com.google.firebase.messaging.FirebaseMessaging;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private ImageView iv_menu;
     private ImageView iv_cam;
@@ -29,16 +42,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btn_grocery;
     private Button btn_medicine;
     private Button btn_customlist;
+    private DrawerLayout drawer_layout;
+    private NavigationView nav_view;
+    private Toolbar toolBar;
 
     private ArrayList<CartItemsData> cartItemsData = new ArrayList<>();
     ArrayList<ItemsData> itemsData = new ArrayList<>();
     ArrayList<ItemsData> itemsDataFruits = new ArrayList<>();
+
+    FCMNotification notification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        nav_view = findViewById(R.id.nav_view);
+        drawer_layout = findViewById(R.id.drawer_layout);
         iv_menu = findViewById(R.id.iv_menu);
         btn_veg = findViewById(R.id.btn_veg);
         btn_fruits = findViewById(R.id.btn_fruits);
@@ -55,10 +75,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_customlist.setOnClickListener(this);
         iv_cam.setOnClickListener(this);
 
+        Intent intentBack = new Intent(this, FCMNotification.class);
+        startService(intentBack);
+
         cartItemsData = (ArrayList<CartItemsData>) getIntent().getSerializableExtra("cart_key");
         itemsData = (ArrayList<ItemsData>) getIntent().getSerializableExtra("veg_key");
         itemsDataFruits = (ArrayList<ItemsData>) getIntent().getSerializableExtra("fruit_key");
 
+        setSupportActionBar(toolBar);
+
+        nav_view.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer_layout, toolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer_layout.addDrawerListener(toggle);
+
+        nav_view.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -68,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (id){
             case R.id.iv_menu:
+                drawer_layout.openDrawer(GravityCompat.START);
                 break;
 
             case R.id.btn_veg:
@@ -152,5 +184,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         alert11.show();
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.nav_orders:
+                finish();
+                Intent intentOrder = new Intent(getApplicationContext(), OrderActivity.class);
+                startActivity(intentOrder);
+                break;
+
+            case R.id.nav_cart:
+                break;
+
+            case R.id.nav_user_about_us:
+                break;
+
+            case R.id.nav_guid:
+                break;
+
+            case R.id.nav_logout:
+                //showLogoutConrim();
+                break;
+        }
+
+        return true;
     }
 }

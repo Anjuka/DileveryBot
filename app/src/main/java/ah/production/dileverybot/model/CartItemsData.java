@@ -25,6 +25,9 @@ public class CartItemsData implements Parcelable {
     @Expose
     private String item_quanti;
 
+    public CartItemsData() {
+    }
+
     public CartItemsData(String item_name, boolean is_check, int position, String item_quanti) {
         this.item_name = item_name;
         this.is_check = is_check;

@@ -15,4 +15,10 @@
     <color name="main_green_light">#478C5C</color>
     <color name="main_green_lime">#BACC81</color>
     <color name="grayout">#808080</color>
+
+
+    <color name="orange">#FFA500</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="green">#32CD32</color>
+    <color name="blue">#0000FF</color>
 </resources>

@@ -137,10 +137,13 @@ public class ConfrimActivity extends AppCompatActivity implements ConfrimAdapter
         String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
 
-        OrderData orderData = new OrderData(currentTime, currentDate, orderNumber, cartItemsData);
+        OrderData orderData = new OrderData(currentTime, "inprogress", currentDate, orderNumber, cartItemsData);
         DocumentReference documentServiceRecords = firebaseFirestore
+                .document("orderRecords/"+user_id+"/"+"order/"+orderNumber);
+
+        /*firebaseFirestore
                 .collection("orderRecords").document(user_id)
-                .collection(String.valueOf(orderNumber)).document("order");
+                .collection(String.valueOf(orderNumber)).document("order");*/
 
 
         documentServiceRecords.set(orderData).addOnSuccessListener(new OnSuccessListener<Void>() {
