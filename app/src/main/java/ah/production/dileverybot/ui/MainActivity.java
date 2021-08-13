@@ -133,6 +133,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case R.id.iv_cam:
                     Intent intentCam = new Intent(getApplicationContext(), CamActivity.class);
                     startActivity(intentCam);
+                    /**
+                     * llllllllll Test Test Test Test Test Test Test Test Test
+                     */
                 break;
         }
 
