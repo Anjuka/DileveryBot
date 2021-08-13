@@ -81,7 +81,23 @@ public class OrderActivity extends AppCompatActivity implements OrderListAdapter
 
         showProgressDialog("Loading...");
         CollectionReference documentReference = firebaseFirestore.collection("orderRecords/" + user_id + "/" + "order");
-        documentReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        documentReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                ArrayList<OrderData> orderDataArrayList = (ArrayList<OrderData>) value.toObjects(OrderData.class);
+
+                Log.d("TAG", "onSuccess: " + orderDataArrayList);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+                rv_orders.setLayoutManager(layoutManager);
+                orderListAdapter = new OrderListAdapter(getApplicationContext(), orderDataArrayList, OrderActivity.this::onItemClick);
+                rv_orders.setAdapter(orderListAdapter);
+                hideProgressDialog();
+            }
+        });
+
+
+        /*documentReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 Log.d("TAG", "onSuccess: " + queryDocumentSnapshots);
@@ -102,7 +118,7 @@ public class OrderActivity extends AppCompatActivity implements OrderListAdapter
                     hideProgressDialog();
                 }
             }
-        });
+        });*/
     }
 
     //Progress Bar
@@ -164,5 +180,6 @@ public class OrderActivity extends AppCompatActivity implements OrderListAdapter
                 dialog.dismiss();
             }
         });
+       ArrayList arrayListUser = new ArrayList();
     }
 }
